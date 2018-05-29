@@ -24,3 +24,11 @@ variable "resource_group_name" {
 variable "resource_group_location" {
   description = "Resource group location"
 }
+
+variable "vnet_name" {
+  description = "Virtual network name"
+}
+
+variable "vnet_location" {
+  description = "Virtual network location"
+}
