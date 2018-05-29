@@ -42,6 +42,7 @@ jobs:
               env: # TODO: edit envs
                 - resource_group_name: "demo_rg_tf"
                 - resource_group_location: "eastus"
+                - vnet_name: "demo_vnet_tf"
                 - vnet_location: "eastus"
           script:
             - pushd $(shipctl get_resource_state "azure_vnet_tf_repo")
