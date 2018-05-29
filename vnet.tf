@@ -81,26 +81,3 @@ resource "azurerm_network_interface" "demo_nic_tf" {
         environment = "Terraform Demo"
     }
 }
-
-# Generate a randomID for naming the storageaccount
-resource "random_id" "randomId" {
-    keepers = {
-        # Generate a new ID only when a new resource group is defined
-        resource_group = "${azurerm_resource_group.resource_group_name.name}"
-    }
-
-    byte_length = 8
-}
-
-# Create a storage account to store the boot diagnostics for a VM
-resource "azurerm_storage_account" "demo_storage_account_tf" {
-    name                = "diag${random_id.randomId.hex}"
-    resource_group_name = "${azurerm_resource_group.resource_group_name.name}"
-    location            = "eastus"
-    account_replication_type = "LRS"
-    account_tier = "Standard"
-
-    tags {
-        environment = "Terraform Demo"
-    }
-}
