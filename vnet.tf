@@ -81,3 +81,7 @@ resource "azurerm_network_interface" "demo_nic_tf" {
         environment = "Terraform Demo"
     }
 }
+
+output "nic_id" {
+  value - "${azurerm_network_interface.demo_nic_tf.id}"
+}

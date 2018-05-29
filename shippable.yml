@@ -24,7 +24,7 @@ resources:
         SEED: "initial_version"
 
 jobs:
-# Provision Azure VM with Terraform
+# Provision Azure Virtual Network with Terraform
   - name: prov_azure_vnet_tf
     type: runSh
     steps:
@@ -39,7 +39,7 @@ jobs:
           name: prov_vnet
           runtime:
             options:
-              env: # TODO: edit envs
+              env:
                 - resource_group_name: "demo_rg_tf"
                 - resource_group_location: "eastus"
                 - vnet_name: "demo_vnet_tf"
@@ -49,14 +49,14 @@ jobs:
             - shipctl copy_file_from_resource_state azure_vnet_tf_state terraform.tfstate .
             - shipctl replace terraform.tfvars
             - terraform plan -var-file=terraform.tfvars
-            # - terraform apply -var-file=terraform.tfvars
+            - terraform apply -var-file=terraform.tfvars
       - OUT: azure_vnet_tf_info
         overwrite: true
       - OUT: azure_vnet_tf_state
     on_success:
       script:
-        - echo "TODO"
-        # - shipctl put_resource_state_multi aws_ec2_tf_info "versionName=$(terraform output ec2_ins_0_ip)" "ec2_ins_0_ip=$(terraform output ec2_ins_0_ip)"
+        - echo "nic_id = $(terraform output nic_id)"
+        - shipctl put_resource_state_multi azure_vnet_tf_info "versionName=$vnet_name" "resource_group_name=$resource_group_name" "nic_id=$(terraform output nic_id)"
     always:
       script:
         - shipctl copy_file_to_resource_state terraform.tfstate azure_vnet_tf_state
