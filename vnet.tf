@@ -83,5 +83,5 @@ resource "azurerm_network_interface" "demo_nic_tf" {
 }
 
 output "nic_id" {
-  value - "${azurerm_network_interface.demo_nic_tf.id}"
+  value = "${azurerm_network_interface.demo_nic_tf.id}"
 }
