@@ -48,6 +48,7 @@ jobs:
             - pushd $(shipctl get_resource_state "azure_vnet_tf_repo")
             - shipctl copy_file_from_resource_state azure_vnet_tf_state terraform.tfstate .
             - shipctl replace terraform.tfvars
+            - terraform init
             - terraform plan -var-file=terraform.tfvars
             - terraform apply -var-file=terraform.tfvars
       - OUT: azure_vnet_tf_info
