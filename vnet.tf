@@ -82,6 +82,26 @@ resource "azurerm_network_interface" "demo_nic_tf" {
     }
 }
 
+output "rg_id" {
+  value = "${azurerm_resource_group.resource_group_name.id}"
+}
+
+output "vnet_id" {
+  value = "${azurerm_virtual_network.vnet_name.id}"
+}
+
+output "subnet_id" {
+  value = "${azurerm_subnet.demo_subnet_tf.id}"
+}
+
+output "public_ip" {
+  value = "${azurerm_public_ip.demo_public_ip_tf.ip_address}"
+}
+
+output "nsg_id" {
+  value = "${azurerm_network_security_group.demo_public_nsg_tf.id}"
+}
+
 output "nic_id" {
   value = "${azurerm_network_interface.demo_nic_tf.id}"
 }
